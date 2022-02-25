@@ -4,7 +4,8 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pinterest_2022/widgets/masonryGrid.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:pinterest_2022/pages/home_page.dart';
 
 import 'models/collection_model.dart';
 import 'services/hive_db.dart';
@@ -28,9 +29,10 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
   List<Collections> list = [];
   List<Collections> listSave = [];
 
+
   _loadDate() async {
     HttpServer.GET(HttpServer.API_SEARCH_COLLECTIONS,
-            HttpServer.paramsSearch(page: 1, query: widget.obj.title))
+            HttpServer.paramsSearch(query: widget.obj.title))
         .then((value) {
       if (value != null) _showData(value);
     });
@@ -40,6 +42,7 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
     Map<String, dynamic> map = jsonDecode(response);
     setState(() => list.addAll(
         HttpServer.parseCollectionResponse(jsonEncode(map['results']))));
+
   }
 
   loadMore() {
@@ -120,13 +123,10 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
       children: [
         CachedNetworkImage(
           imageUrl: obj.coverPhoto!.urls!.full!,
-          placeholder: (context, url) => Container(
-            height: obj.coverPhoto!.height! / obj.coverPhoto!.width! * 200,
-            color: Color.fromARGB(
-              Random().nextInt(256),
-              Random().nextInt(256),
-              Random().nextInt(256),
-              Random().nextInt(256),
+          placeholder: (context, url) => AspectRatio(
+            aspectRatio: obj.coverPhoto!.width! / obj.coverPhoto!.height!,
+            child: Container(
+              color: obj.coverPhoto!.color!.toColor(),
             ),
           ),
         ),
@@ -206,10 +206,11 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
                 borderRadius: BorderRadius.circular(100),
                 child: CachedNetworkImage(
                   imageUrl: obj.coverPhoto!.user!.profileImage!.large!,
-                  placeholder: (context, url) => Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.greenAccent,
+                  placeholder: (context, url) => AspectRatio(
+                    aspectRatio:
+                        obj.coverPhoto!.width! / obj.coverPhoto!.height!,
+                    child: Container(
+                      color: obj.coverPhoto!.color!.toColor(),
                     ),
                   ),
                 ),
@@ -297,17 +298,156 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
-          MasonryGRID.masonryGridView(
-              count: list.length,
-              controller: _scrollController2,
-              physics: const NeverScrollableScrollPhysics(),
-              builder: (context, index) {
-                if (index == list.length) {
-                  return const SizedBox.shrink();
-                }
-                return MasonryGRID.grid(
-                    index: index, list: list, context: context);
-              }),
+          MasonryGridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: _scrollController2,
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    if (index == list.length) {
+                      return const SizedBox.shrink();
+                    }
+                    return _grid(index: index);
+                  },
+                ),
+        ],
+      ),
+    );
+  }
+
+  GestureDetector _grid({index}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailsPinterest(obj: list[index])));
+      },
+      child: Card(
+        elevation: 0,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: CachedNetworkImage(
+                imageUrl: list[index].coverPhoto!.urls!.regular!,
+                placeholder: (context, url) => AspectRatio(
+                  aspectRatio: list[index].coverPhoto!.width! /
+                      list[index].coverPhoto!.height!,
+                  child: Container(
+                    color: list[index].coverPhoto!.color!.toColor(),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            list[index].coverPhoto!.description != null
+                ? bottomListTile(index: index)
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        moreHorizontal(),
+                      ],
+                    ),
+                  ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  GestureDetector moreHorizontal() {
+    return GestureDetector(
+      onTap: () {
+        Widgets.bottomSheetPadding(
+          context: context,
+          children: [
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(CupertinoIcons.clear),
+                ),
+                const SizedBox(width: 20),
+                Widgets.text17BottomSheet(text: "Share to"),
+              ],
+            ),
+            Container(
+              height: 100,
+              padding: const EdgeInsets.only(top: 15),
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Widgets.faangCompany(
+                      text: "Send", img: "assets/images/img.png"),
+                  const SizedBox(width: 20),
+                  Widgets.faangCompany(
+                      text: "Telegram", img: "assets/images/img_6.png"),
+                  const SizedBox(width: 20),
+                  Widgets.faangCompany(
+                      text: "Facebook", img: "assets/images/img_2.png"),
+                  const SizedBox(width: 20),
+                  Widgets.faangCompany(
+                      text: "Gmail", img: "assets/images/img_3.png"),
+                  const SizedBox(width: 20),
+                  Widgets.faangCompany(
+                      text: "Copy link", img: "assets/images/img_4.png"),
+                  const SizedBox(width: 20),
+                  Widgets.faangCompany(
+                      text: "More", img: "assets/images/img_5.png"),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
+            Widgets.text20BottomSheet(text: "Download image"),
+            const SizedBox(height: 20),
+            Widgets.text20BottomSheet(text: "Hide Pin"),
+            const SizedBox(height: 20),
+            Widgets.columnButtonBottomSheet(
+                text20: "Report Pin",
+                text15: "This goes against Pinterest's community guidelines"),
+            const SizedBox(height: 40),
+            Widgets.text15BottomSheet(
+                text: "This Pin is inspired by your recent activity"),
+          ],
+        );
+      },
+      child: const Icon(
+        Icons.more_horiz,
+        size: 20,
+      ),
+    );
+  }
+
+  Padding bottomListTile({index}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              height: 30,
+              imageUrl: list[index].coverPhoto!.user!.profileImage!.large!,
+            ),
+          ),
+          const SizedBox(width: 5),
+          Expanded(
+            child: Text(
+              list[index].coverPhoto!.description!,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: const TextStyle(fontSize: 12),
+            ),
+          ),
+          moreHorizontal(),
         ],
       ),
     );

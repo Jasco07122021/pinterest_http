@@ -43,10 +43,7 @@ class Widgets {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        GestureDetector(
-          onTap: () {},
-          child: Widgets.text20BottomSheet(text: text),
-        ),
+        Widgets.text20BottomSheet(text: text),
         const Icon(CupertinoIcons.right_chevron),
       ],
     );

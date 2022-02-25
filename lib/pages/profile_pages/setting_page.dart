@@ -47,7 +47,7 @@ class _SettingPageState extends State<SettingPage> {
             onTap: () {
               _showSetting();
             },
-            child: Widgets.text20BottomSheet(text: "Public profile"),
+            child: Widgets.buttonRowBottomSheet(text: "Public profile"),
           ),
           const SizedBox(height: 20),
           Widgets.buttonRowBottomSheet(text: "Account settings"),
