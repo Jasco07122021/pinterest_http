@@ -18,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final ScrollController _scrollController = ScrollController();
   List<Collections> list = [];
-  Map<String, String> map = {};
+  Map<dynamic, dynamic> map = {};
 
   @override
   void initState() {

@@ -39,8 +39,8 @@ class HiveDB {
     return list;
   }
 
-  static Map<String,String> getUser() {
-    Map<String,String> map = box.get("user");
+  static Map<dynamic,dynamic> getUser() {
+    Map<dynamic,dynamic> map = box.get("user");
     return map;
   }
 

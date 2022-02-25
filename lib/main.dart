@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pinterest_2022/pages/first_page.dart';
 import 'package:pinterest_2022/pages/login_page/sign_in.dart';
 import 'package:pinterest_2022/services/hive_db.dart';
 
@@ -16,7 +17,6 @@ class MyApp extends StatelessWidget {
 
   static final RouteObserver<PageRoute> routeObserver =
       RouteObserver<PageRoute>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +37,10 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: const SignInPage(),
+      home: HiveDB.getUser().isEmpty ? const SignInPage() : const FirstPage(),
     );
   }
 }
-
-
-
 
 // _loadDateDio() {
 //   DioServer.GET(DioServer.API_COLLECTIONS, DioServer.paramsEmpty())
@@ -77,9 +74,6 @@ class MyApp extends StatelessWidget {
 //   setState(() => list.addAll(response));
 // }
 
-
-
-
 // _loadDateDio() {
 //   DioServer.GET(DioServer.API_SEARCH_COLLECTIONS,
 //       DioServer.paramsSearch(page: 1, query: widget.text))
@@ -105,4 +99,3 @@ class MyApp extends StatelessWidget {
 //     loadMorePage++;
 //   });
 // }
-
