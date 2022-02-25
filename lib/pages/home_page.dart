@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> with RouteAware {
   List<Collections> list = [];
   int loadMorePage = 2;
   final ScrollController _scrollController = ScrollController();
-  bool isLoading = true;
+  bool isLoading = false;
 
   _loadDateHttp() {
     HttpServer.GET(HttpServer.API_COLLECTIONS, HttpServer.paramsEmpty())
@@ -150,9 +150,9 @@ class _HomePageState extends State<HomePage> with RouteAware {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: Colors.black,
+        color: Theme.of(context).hoverColor,
       ),
-      child: const Text("All"),
+      child: Text("All", style: TextStyle(color: Theme.of(context).primaryColor),),
     );
   }
 

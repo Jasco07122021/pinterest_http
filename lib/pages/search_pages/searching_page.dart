@@ -26,13 +26,14 @@ class _SearchingPageState extends State<SearchingPage> {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       height: 50,
       width: double.infinity,
-      color: Colors.white,
+      color: Theme.of(context).primaryColor,
       child: Row(
         children: [
           Flexible(
             child: TextField(
               controller: controller,
               autofocus: true,
+              style: TextStyle(color: Theme.of(context).hoverColor),
               onSubmitted: (value) async {
                Navigator.push(
                     context,
@@ -42,36 +43,36 @@ class _SearchingPageState extends State<SearchingPage> {
               decoration: InputDecoration(
                 hintText: "Search for ideas",
                 hintStyle: const TextStyle(color: Colors.grey),
-                suffixIcon: const Icon(
+                suffixIcon: Icon(
                   CupertinoIcons.camera_fill,
-                  color: Colors.black,
+                  color: Theme.of(context).hoverColor,
                 ),
                 contentPadding: const EdgeInsets.only(top: 10, left: 10),
                 isCollapsed: true,
                 filled: true,
-                fillColor: Colors.grey.shade200,
-                enabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
+                fillColor: Theme.of(context).backgroundColor,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(25),
                   ),
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: Theme.of(context).backgroundColor),
                 ),
-                focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(25),
                   ),
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: Theme.of(context).backgroundColor),
                 ),
               ),
             ),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context,"back");
+              Navigator.pop(context);
             },
-            child: const Text(
+            child: Text(
               "Cancel",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Theme.of(context).hoverColor),
             ),
           ),
         ],

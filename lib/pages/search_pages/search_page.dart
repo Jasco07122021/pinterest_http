@@ -37,7 +37,6 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   Widget build(BuildContext context) {
     FocusScope.of(context).unfocus();
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -161,7 +160,6 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       height: 50,
       width: double.infinity,
-      color: Colors.white,
       child: TextField(
         onTap: () {
           Navigator.push(
@@ -176,23 +174,23 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
         decoration: InputDecoration(
           hintText: "Search for ideas",
           hintStyle: const TextStyle(color: Colors.grey),
-          suffixIcon: const Icon(
+          suffixIcon: Icon(
             CupertinoIcons.camera_fill,
-            color: Colors.black,
+            color: Theme.of(context).hoverColor,
           ),
-          prefixIcon: const Icon(
+          prefixIcon: Icon(
             CupertinoIcons.search,
-            color: Colors.black,
+            color: Theme.of(context).hoverColor,
           ),
           contentPadding: const EdgeInsets.only(top: 10),
           isCollapsed: true,
           filled: true,
-          fillColor: Colors.grey.shade200,
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
+          fillColor: Theme.of(context).backgroundColor,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
               Radius.circular(25),
             ),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: BorderSide(color: Theme.of(context).backgroundColor),
           ),
         ),
       ),

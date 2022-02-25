@@ -56,11 +56,9 @@ class _FirstPageState extends State<FirstPage> {
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             child: BottomNavigationBar(
-              selectedIconTheme: const IconThemeData(color: Colors.black),
               showSelectedLabels: false,
               showUnselectedLabels: false,
               currentIndex: _pagesIndex,
-              unselectedIconTheme: const IconThemeData(color: Colors.grey),
               type: BottomNavigationBarType.fixed,
               items: const [
                 BottomNavigationBarItem(

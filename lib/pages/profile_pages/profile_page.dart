@@ -34,9 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        actionsIconTheme: const IconThemeData(color: Colors.black),
         actions: [
           const Icon(Icons.share),
           const SizedBox(width: 20),
@@ -58,10 +56,10 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 50),
           CircleAvatar(
             radius: 50,
-            backgroundColor: Colors.grey.shade200,
+            backgroundColor: Theme.of(context).backgroundColor,
             child: Text(
               map["name"]![0].toString().toUpperCase(),
-              style: const TextStyle(fontSize: 30, color: Colors.black),
+              style: const TextStyle(fontSize: 30),
             ),
           ),
           const SizedBox(height: 10),
@@ -83,16 +81,19 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 40,
             child: TextField(
               decoration: InputDecoration(
-                fillColor: Colors.grey.shade200,
+                fillColor: Theme.of(context).backgroundColor,
                 filled: true,
-                prefixIcon: const Icon(CupertinoIcons.search),
+                prefixIcon: Icon(
+                  CupertinoIcons.search,
+                  color: Theme.of(context).hoverColor,
+                ),
                 hintText: "Search your Pins",
                 hintStyle: const TextStyle(color: Colors.grey),
                 isCollapsed: true,
                 contentPadding: const EdgeInsets.only(top: 10),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: const BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
                 ),
               ),
             ),
@@ -113,7 +114,6 @@ class _ProfilePageState extends State<ProfilePage> {
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontSize: 30,
-            color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -132,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   MasonryGridView _bodyList() {
     return MasonryGridView.count(
-      shrinkWrap: true,
+        shrinkWrap: true,
         crossAxisCount: 2,
         itemCount: list.length,
         physics: const NeverScrollableScrollPhysics(),
@@ -145,7 +145,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<dynamic> _menuBottomSheet() {
     return showModalBottomSheet(
       context: context,
-      builder: (context) => Padding(
+      builder: (context) => Container(
+        color: Theme.of(context).backgroundColor,
         padding:
             const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
         child: Column(
@@ -202,6 +203,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 builder: (context) => DetailsPinterest(obj: list[index])));
       },
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         elevation: 0,
         child: Column(
           children: [
@@ -222,14 +226,14 @@ class _ProfilePageState extends State<ProfilePage> {
             list[index].coverPhoto!.description != null
                 ? bottomListTile(index: index)
                 : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  moreHorizontal(),
-                ],
-              ),
-            ),
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        moreHorizontal(),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),
@@ -304,7 +308,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Padding bottomListTile({index}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
       child: Row(
         children: [
           ClipRRect(

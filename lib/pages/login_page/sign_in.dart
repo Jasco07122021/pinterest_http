@@ -24,7 +24,7 @@ class _SignInPageState extends State<SignInPage> {
             Column(
               children: [
                 Container(
-                  height: size.height * 0.35,
+                  height: size.height * 0.353,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
@@ -33,12 +33,12 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   child: Container(
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.bottomCenter,
                         end: Alignment.center,
                         colors: [
-                          Colors.white,
+                          Theme.of(context).primaryColor,
                           Colors.transparent,
                         ],
                       ),
@@ -65,10 +65,10 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const Spacer(),
                 RichText(
-                  text: const TextSpan(
-                    style: TextStyle(color: Colors.black),
+                  text: TextSpan(
+                    style: TextStyle(color: Theme.of(context).hoverColor),
                     text: "The program was created by ",
-                    children: [
+                    children: const [
                       TextSpan(
                         style: TextStyle(
                           color: Colors.blueAccent,
@@ -134,9 +134,9 @@ class _SignInPageState extends State<SignInPage> {
         onSubmitted: (value) {},
         decoration: InputDecoration(
           hintText: text,
-          hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey),
           filled: true,
-          fillColor: Colors.grey.shade200,
+          fillColor: Theme.of(context).backgroundColor,
           isCollapsed: true,
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

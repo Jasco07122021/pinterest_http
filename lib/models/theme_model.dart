@@ -2,19 +2,12 @@ import 'package:flutter/material.dart';
 
 CustomTheme currentTheme = CustomTheme();
 
-class CustomTheme with ChangeNotifier {
-  // static bool isDarkTheme = true;
-  // ThemeMode get currentTheme => isDarkTheme ? ThemeMode.dark : ThemeMode.light;
-  //
-  // void toggleTheme() {
-  //   isDarkTheme = !isDarkTheme;
-  //   notifyListeners();
-  // }
-
+class CustomTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+      hoverColor: Colors.black,
       primaryColor: Colors.white,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade200,
       iconTheme: const IconThemeData(color: Colors.black),
       appBarTheme: const AppBarTheme(
         elevation: 0,
@@ -41,23 +34,27 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get darkTheme {
     return ThemeData(
-      primaryColor: Colors.black54,
-      backgroundColor: Colors.grey,
+      hoverColor: Colors.white,
+      primaryColor: Colors.black,
+      backgroundColor: Colors.grey.shade900,
       iconTheme: const IconThemeData(color: Colors.white),
       appBarTheme: const AppBarTheme(
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Colors.black54,
-        titleTextStyle: TextStyle(color: Colors.white),
-        toolbarTextStyle: TextStyle(color: Colors.white),
+        backgroundColor: Colors.black,
+        titleTextStyle: TextStyle(color: Colors.black),
+        toolbarTextStyle: TextStyle(color: Colors.black),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(0.7),
+        unselectedItemColor: Colors.white.withOpacity(0.4),
+        selectedIconTheme: const IconThemeData(
+          color: Colors.white,
+        )
       ),
       cardColor: Colors.black,
-      scaffoldBackgroundColor: Colors.blueGrey.shade900,
+      scaffoldBackgroundColor: Colors.black,
       textTheme: const TextTheme(
         headline1: TextStyle(color: Colors.white),
         headline2: TextStyle(color: Colors.white),

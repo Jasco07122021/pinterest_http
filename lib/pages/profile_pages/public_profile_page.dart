@@ -27,8 +27,9 @@ class _PublicProfilePageState extends State<PublicProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: const BorderRadius.vertical(
           top: Radius.circular(25),
         ),
       ),
@@ -52,7 +53,7 @@ class _PublicProfilePageState extends State<PublicProfilePage> {
                   ),
                   MaterialButton(
                     child: const Text("Done"),
-                    color: Colors.grey.shade200,
+                    color: Theme.of(context).backgroundColor,
                     shape: const StadiumBorder(),
                     minWidth: 50,
                     onPressed: () {},
@@ -62,23 +63,23 @@ class _PublicProfilePageState extends State<PublicProfilePage> {
               Widgets.text17BottomSheet(text: "Settings"),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Center(
             child: Column(
               children: [
                 CircleAvatar(
                   radius: 60,
-                  backgroundColor: Colors.grey.shade200,
+                  backgroundColor: Theme.of(context).backgroundColor,
                   child: Text(
                     map["name"]![0].toString().toUpperCase(),
-                    style: const TextStyle(fontSize: 30, color: Colors.black),
+                    style: const TextStyle(fontSize: 30),
                   ),
                 ),
                 MaterialButton(
                   onPressed: () {},
                   child: const Text("Edit"),
                   shape: const StadiumBorder(),
-                  color: Colors.grey.shade200,
+                  color: Theme.of(context).backgroundColor,
                   elevation: 1,
                 ),
               ],

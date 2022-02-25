@@ -102,12 +102,12 @@ class _ResultSearchPageState extends State<ResultSearchPage> {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       height: 50,
       width: double.infinity,
-      color: Colors.white,
+      color: Theme.of(context).primaryColor,
       child: Row(
         children: [
           IconButton(
             onPressed: () {
-              Navigator.pop(context, "back");
+              Navigator.pop(context);
             },
             icon: const Icon(CupertinoIcons.left_chevron),
           ),
@@ -129,12 +129,12 @@ class _ResultSearchPageState extends State<ResultSearchPage> {
                     const EdgeInsets.only(top: 10, left: 10, bottom: 10),
                 isCollapsed: true,
                 filled: true,
-                fillColor: Colors.grey.shade200,
-                enabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
+                fillColor: Theme.of(context).backgroundColor,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(25),
                   ),
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: Theme.of(context).backgroundColor),
                 ),
               ),
             ),
@@ -185,6 +185,9 @@ class _ResultSearchPageState extends State<ResultSearchPage> {
                 builder: (context) => DetailsPinterest(obj: list[index])));
       },
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         elevation: 0,
         child: Column(
           children: [
@@ -287,7 +290,7 @@ class _ResultSearchPageState extends State<ResultSearchPage> {
 
   Padding bottomListTile({index}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
       child: Row(
         children: [
           ClipRRect(

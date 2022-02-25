@@ -5,7 +5,8 @@ class Widgets {
   static Future<dynamic> bottomSheetPadding({context, children}) {
     return showModalBottomSheet(
       context: context,
-      builder: (context) => Padding(
+      builder: (context) => Container(
+        color: Theme.of(context).backgroundColor,
         padding:
             const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
         child: Column(
