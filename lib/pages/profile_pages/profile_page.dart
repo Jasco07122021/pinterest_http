@@ -13,6 +13,8 @@ import 'setting_page.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
+  static const id = '/profile_page';
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -198,9 +200,11 @@ class _ProfilePageState extends State<ProfilePage> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DetailsPinterest(obj: list[index])));
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsPinterest(obj: list[index]),
+          ),
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(

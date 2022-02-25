@@ -7,6 +7,8 @@ import '../../widgets/bottom_sheet.dart';
 class PublicProfilePage extends StatefulWidget {
   const PublicProfilePage({Key? key}) : super(key: key);
 
+  static const id = '/public_profile_page';
+
   @override
   _PublicProfilePageState createState() => _PublicProfilePageState();
 }

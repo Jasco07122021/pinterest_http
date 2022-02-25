@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pinterest_2022/pages/messenger_page.dart';
 import 'package:pinterest_2022/pages/search_pages/search_page.dart';
-import 'package:pinterest_2022/services/hive_db.dart';
 
 import 'home_page.dart';
 import 'profile_pages/profile_page.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
+
+  static const id = '/first_page';
 
   @override
   _FirstPageState createState() => _FirstPageState();

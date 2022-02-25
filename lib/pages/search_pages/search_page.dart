@@ -9,6 +9,8 @@ import 'searching_page.dart';
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
+  static const id = '/search_page';
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -25,7 +27,9 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   @override
   void didPopNext() {
     super.didPopNext();
-    FocusScope.of(context).unfocus();
+    if (mounted) {
+      FocusScope.of(context).unfocus();
+    }
   }
 
   @override
@@ -162,12 +166,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
       width: double.infinity,
       child: TextField(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SearchingPage(),
-            ),
-          );
+          Navigator.pushNamed(context, SearchingPage.id);
           FocusScope.of(context).unfocus();
         },
         focusNode: myFocusNode,

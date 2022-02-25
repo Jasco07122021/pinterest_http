@@ -5,6 +5,8 @@ import 'package:pinterest_2022/services/hive_db.dart';
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
+  static const id = '/sign_in_page';
+
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -115,8 +117,7 @@ class _SignInPageState extends State<SignInPage> {
             "surname":controllerSurname.text.trim().toString(),
           };
           HiveDB.putUser(map);
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const FirstPage()));
+          Navigator.pushReplacementNamed(context, FirstPage.id);
         }
       },
       child: Text(

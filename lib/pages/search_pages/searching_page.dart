@@ -5,6 +5,8 @@ import 'result_search_page.dart';
 class SearchingPage extends StatefulWidget {
   const SearchingPage({Key? key}) : super(key: key);
 
+  static const id = '/searching_page';
+
   @override
   _SearchingPageState createState() => _SearchingPageState();
 }
@@ -35,10 +37,12 @@ class _SearchingPageState extends State<SearchingPage> {
               autofocus: true,
               style: TextStyle(color: Theme.of(context).hoverColor),
               onSubmitted: (value) async {
-               Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ResultSearchPage(text: value)));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultSearchPage(text: value),
+                  ),
+                );
               },
               decoration: InputDecoration(
                 hintText: "Search for ideas",
@@ -55,13 +59,15 @@ class _SearchingPageState extends State<SearchingPage> {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(25),
                   ),
-                  borderSide: BorderSide(color: Theme.of(context).backgroundColor),
+                  borderSide:
+                      BorderSide(color: Theme.of(context).backgroundColor),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(25),
                   ),
-                  borderSide: BorderSide(color: Theme.of(context).backgroundColor),
+                  borderSide:
+                      BorderSide(color: Theme.of(context).backgroundColor),
                 ),
               ),
             ),

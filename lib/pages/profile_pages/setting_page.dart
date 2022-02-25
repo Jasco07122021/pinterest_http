@@ -7,6 +7,8 @@ import '../../widgets/bottom_sheet.dart';
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
 
+  static const id = '/setting_page';
+
   @override
   _SettingPageState createState() => _SettingPageState();
 }

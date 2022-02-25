@@ -9,14 +9,15 @@ import 'package:pinterest_2022/pages/home_page.dart';
 import 'package:pinterest_2022/services/http_server.dart';
 
 import '../../details.dart';
-import '../../services/hive_db.dart';
 import '../../widgets/bottom_sheet.dart';
 import 'searching_page.dart';
 
 class ResultSearchPage extends StatefulWidget {
-  late String text;
+  final String? text;
 
-  ResultSearchPage({Key? key, required this.text}) : super(key: key);
+  const ResultSearchPage({Key? key, this.text}) : super(key: key);
+
+  static const id = '/result_search_page';
 
   @override
   _ResultSearchPageState createState() => _ResultSearchPageState();
@@ -115,10 +116,7 @@ class _ResultSearchPageState extends State<ResultSearchPage> {
             child: TextField(
               controller: controller,
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SearchingPage()));
+                Navigator.pushNamed(context, SearchingPage.id);
                 FocusScope.of(context).unfocus();
               },
               focusNode: myFocusNode,
@@ -134,7 +132,8 @@ class _ResultSearchPageState extends State<ResultSearchPage> {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(25),
                   ),
-                  borderSide: BorderSide(color: Theme.of(context).backgroundColor),
+                  borderSide:
+                      BorderSide(color: Theme.of(context).backgroundColor),
                 ),
               ),
             ),
@@ -180,9 +179,11 @@ class _ResultSearchPageState extends State<ResultSearchPage> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DetailsPinterest(obj: list[index])));
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsPinterest(obj: list[index]),
+          ),
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(

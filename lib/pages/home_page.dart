@@ -25,6 +25,8 @@ extension ColorExtension on String {
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  static const id = '/home_page';
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -163,7 +165,7 @@ class _HomePageState extends State<HomePage> with RouteAware {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailsPinterest(obj: list[index])));
+                builder: (context) => DetailsPinterest(obj: list[index]),),);
       },
       child: Card(
         shape: RoundedRectangleBorder(

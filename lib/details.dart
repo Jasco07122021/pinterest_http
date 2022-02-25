@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,9 +12,11 @@ import 'services/http_server.dart';
 import 'widgets/bottom_sheet.dart';
 
 class DetailsPinterest extends StatefulWidget {
-  final Collections obj;
+  final Collections? obj;
 
-  const DetailsPinterest({Key? key, required this.obj}) : super(key: key);
+  const DetailsPinterest({Key? key, this.obj}) : super(key: key);
+
+  static const id = '/details_page';
 
   @override
   _DetailsPinterestState createState() => _DetailsPinterestState();
@@ -29,10 +30,9 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
   List<Collections> list = [];
   List<Collections> listSave = [];
 
-
   _loadDate() async {
     HttpServer.GET(HttpServer.API_SEARCH_COLLECTIONS,
-            HttpServer.paramsSearch(query: widget.obj.title))
+            HttpServer.paramsSearch(query: widget.obj!.title))
         .then((value) {
       if (value != null) _showData(value);
     });
@@ -42,7 +42,6 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
     Map<String, dynamic> map = jsonDecode(response);
     setState(() => list.addAll(
         HttpServer.parseCollectionResponse(jsonEncode(map['results']))));
-
   }
 
   loadMore() {
@@ -50,7 +49,7 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
         HttpServer.API_SEARCH_COLLECTIONS,
         HttpServer.paramsLoadMore(
           page: loadMorePage,
-          query: widget.obj.title,
+          query: widget.obj!.title,
         )).then((value) {
       if (value != null) _showData(value);
     });
@@ -63,7 +62,7 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
   @override
   void initState() {
     super.initState();
-    obj = widget.obj;
+    obj = widget.obj!;
     _loadDate();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
@@ -299,18 +298,18 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
           ),
           const SizedBox(height: 10),
           MasonryGridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: _scrollController2,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    if (index == list.length) {
-                      return const SizedBox.shrink();
-                    }
-                    return _grid(index: index);
-                  },
-                ),
+            shrinkWrap: true,
+            crossAxisCount: 2,
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _scrollController2,
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              if (index == list.length) {
+                return const SizedBox.shrink();
+              }
+              return _grid(index: index);
+            },
+          ),
         ],
       ),
     );
@@ -320,9 +319,11 @@ class _DetailsPinterestState extends State<DetailsPinterest> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DetailsPinterest(obj: list[index])));
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsPinterest(obj: list[index]),
+          ),
+        );
       },
       child: Card(
         elevation: 0,
