@@ -25,8 +25,8 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     if (HiveDB.getSaved().isNotEmpty) {
       list = HiveDB.getSaved();
-      map = HiveDB.getUser();
     }
+    map = HiveDB.getUser();
   }
 
   @override
