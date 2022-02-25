@@ -47,6 +47,7 @@ class MasonryGRID {
                   height: list[index].coverPhoto!.height! /
                       list[index].coverPhoto!.width! *
                       200,
+                  //
                   color: Color.fromARGB(
                     Random().nextInt(256),
                     Random().nextInt(256),
