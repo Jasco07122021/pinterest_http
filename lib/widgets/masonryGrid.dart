@@ -7,8 +7,9 @@ import 'package:pinterest_2022/details.dart';
 import 'package:pinterest_2022/services/hive_db.dart';
 import 'bottom_sheet.dart';
 
-class MasonryGRID{
-  static MasonryGridView masonryGridView({builder,count,controller,physics}){
+class MasonryGRID {
+  static MasonryGridView masonryGridView(
+      {builder, count, controller, physics}) {
     return MasonryGridView.count(
       controller: controller,
       physics: physics,
@@ -22,14 +23,20 @@ class MasonryGRID{
     );
   }
 
-  static GestureDetector grid({index,list,context}) {
+  static GestureDetector grid({index, list, context}) {
     return GestureDetector(
       onTap: () {
         HiveDB.put(list);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPinterest(obj: list[index])));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailsPinterest(obj: list[index])));
       },
       child: Card(
         elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: Column(
           children: [
             ClipRRect(
@@ -51,23 +58,23 @@ class MasonryGRID{
             ),
             const SizedBox(height: 10),
             list[index].coverPhoto!.description != null
-                ? bottomListTile(index:index,list: list,context: context)
+                ? bottomListTile(index: index, list: list, context: context)
                 : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  moreHorizontal(context: context),
-                ],
-              ),
-            ),
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        moreHorizontal(context: context),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),
     );
   }
 
- static GestureDetector moreHorizontal({context}) {
+  static GestureDetector moreHorizontal({context}) {
     return GestureDetector(
       onTap: () {
         Widgets.bottomSheetPadding(
@@ -133,9 +140,9 @@ class MasonryGRID{
     );
   }
 
-  static Padding bottomListTile({index,list,context}) {
+  static Padding bottomListTile({index, list, context}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
       child: Row(
         children: [
           ClipRRect(
@@ -160,5 +167,4 @@ class MasonryGRID{
       ),
     );
   }
-
 }

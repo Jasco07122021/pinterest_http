@@ -40,7 +40,7 @@ class HiveDB {
   }
 
   static Map<dynamic,dynamic> getUser() {
-    Map<dynamic,dynamic> map = box.get("user");
+    Map<dynamic,dynamic> map = box.get("user") ?? {};
     return map;
   }
 

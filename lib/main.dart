@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pinterest_2022/models/theme_model.dart';
 import 'package:pinterest_2022/pages/first_page.dart';
 import 'package:pinterest_2022/pages/login_page/sign_in.dart';
 import 'package:pinterest_2022/services/hive_db.dart';
@@ -8,8 +9,11 @@ import 'package:pinterest_2022/services/hive_db.dart';
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox(HiveDB.nameHive);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
-  HiveDB.box.delete("collections");
+  if (HiveDB.get().isNotEmpty) {
+    HiveDB.box.delete("collections");
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -20,24 +24,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
     return MaterialApp(
       navigatorObservers: [routeObserver],
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.white,
-          color: Colors.white,
-          elevation: 0,
-        ),
-      ),
-      home: HiveDB.getUser().isEmpty ? const SignInPage() : const FirstPage(),
+      theme: CustomTheme.lightTheme,
+      darkTheme: CustomTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: (HiveDB.getUser().isEmpty) ? const SignInPage() : const FirstPage(),
     );
   }
 }
