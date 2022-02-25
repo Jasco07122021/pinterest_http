@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/hive_db.dart';
 import '../../widgets/bottom_sheet.dart';
 
 class PublicProfilePage extends StatefulWidget {
@@ -11,6 +12,18 @@ class PublicProfilePage extends StatefulWidget {
 }
 
 class _PublicProfilePageState extends State<PublicProfilePage> {
+  Map<dynamic, dynamic> map = {};
+  late TextEditingController controllerName;
+  late TextEditingController controllerSurname;
+
+  @override
+  void initState() {
+    super.initState();
+    map = HiveDB.getUser();
+    controllerName = TextEditingController(text: map["name"]!);
+    controllerSurname = TextEditingController(text: map["surname"]!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,6 +61,34 @@ class _PublicProfilePageState extends State<PublicProfilePage> {
               ),
               Widgets.text17BottomSheet(text: "Settings"),
             ],
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.grey.shade200,
+                  child: Text(
+                    map["name"]![0].toString().toUpperCase(),
+                    style: const TextStyle(fontSize: 30, color: Colors.black),
+                  ),
+                ),
+                MaterialButton(
+                  onPressed: () {},
+                  child: const Text("Edit"),
+                  shape: const StadiumBorder(),
+                  color: Colors.grey.shade200,
+                  elevation: 1,
+                ),
+              ],
+            ),
+          ),
+          TextField(
+            decoration: InputDecoration(
+              hintText: controllerName.text,
+              enabledBorder: InputBorder.none,
+            ),
           ),
         ],
       ),
