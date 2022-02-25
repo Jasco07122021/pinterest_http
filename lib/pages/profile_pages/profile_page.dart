@@ -132,6 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   MasonryGridView _bodyList() {
     return MasonryGridView.count(
+      shrinkWrap: true,
         crossAxisCount: 2,
         itemCount: list.length,
         physics: const NeverScrollableScrollPhysics(),

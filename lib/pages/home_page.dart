@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> with RouteAware {
     setState(() {
       isLoading = true;
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     HttpServer.GET(HttpServer.API_COLLECTIONS,
             HttpServer.paramsLoadMore(page: loadMorePage))
         .then((value) {
@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> with RouteAware {
                       ),
                     ),
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
           ],
         ),
       ),
@@ -166,6 +166,9 @@ class _HomePageState extends State<HomePage> with RouteAware {
                 builder: (context) => DetailsPinterest(obj: list[index])));
       },
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         elevation: 0,
         child: Column(
           children: [
@@ -268,7 +271,7 @@ class _HomePageState extends State<HomePage> with RouteAware {
 
   Padding bottomListTile({index}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
       child: Row(
         children: [
           ClipRRect(

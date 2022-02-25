@@ -17,6 +17,7 @@ class CustomTheme with ChangeNotifier {
       backgroundColor: Colors.white,
       iconTheme: const IconThemeData(color: Colors.black),
       appBarTheme: const AppBarTheme(
+        elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         titleTextStyle: TextStyle(color: Colors.black),
@@ -44,6 +45,7 @@ class CustomTheme with ChangeNotifier {
       backgroundColor: Colors.grey,
       iconTheme: const IconThemeData(color: Colors.white),
       appBarTheme: const AppBarTheme(
+        elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.black54,
         titleTextStyle: TextStyle(color: Colors.white),
